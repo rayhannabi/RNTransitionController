@@ -146,7 +146,9 @@ extension RNTransitionController: UIViewControllerAnimatedTransitioning {
                 
             case .slideIn:
                 self.slideInAnimation(with: transitionContext, containerView: containerView, firstView: firstView, secondView: secondView)
-                
+            
+            case .slideFromTopToBottom:
+                self.slideFromTopToBottom(with: transitionContext, containerView: containerView, firstView: firstView, secondView: secondView)
             }
         }
         
@@ -335,6 +337,44 @@ private extension RNTransitionController {
             
         }
         
+    }
+    
+    private func slideFromTopToBottom(with transitionContext: UIViewControllerContextTransitioning, containerView: UIView, firstView: UIView, secondView: UIView) {
+        
+        let originX = containerView.frame.origin.x
+        var originY = containerView.frame.origin.y - containerView.frame.size.height
+        let width = containerView.frame.size.width
+        let height = containerView.frame.size.height
+       
+        var offsetFrame = CGRect(x: originX, y: originY, width: width, height: height)
+        
+        switch currentState! {
+        case .presenting:
+            containerView.addSubview(secondView)
+            secondView.frame = offsetFrame
+            
+            UIView.animate(withDuration: self.duration, delay: 0.0, options: .curveEaseOut, animations: {
+                
+                secondView.frame = containerView.frame
+                
+            }) { (finished) in
+                transitionContext.completeTransition(finished)
+            }
+            
+        case .dismissing:
+            
+            originY = containerView.frame.origin.y + containerView.frame.size.height
+            
+            offsetFrame = CGRect(x: originX, y: originY, width: width, height: height)
+            
+            UIView.animate(withDuration: self.duration, animations: {
+                
+                firstView.frame = offsetFrame
+                
+            }) { (finished) in
+                transitionContext.completeTransition(finished)
+            }
+        }
     }
     
 }

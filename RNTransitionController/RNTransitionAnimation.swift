@@ -23,4 +23,5 @@ public enum RNTransitionAnimation {
     case fadeIn
     case fadeInWithSubviewZoomIn
     case slideIn
+    case slideFromTopToBottom
 }
