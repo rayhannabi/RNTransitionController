@@ -17,6 +17,7 @@ import Foundation
 /// - fadeIn: Provides a fade-in transition
 /// - fadeInWithSubviewZoomIn: Provides a fade-in transition with a zoom-in animation for the subview
 /// - slideIn: Provides a slide-in transition
+/// - slideFromTopToBottom: Provides a sliding view from top to bottom transition
 public enum RNTransitionAnimation {
     case coverVertical
     case coverHorizontal
