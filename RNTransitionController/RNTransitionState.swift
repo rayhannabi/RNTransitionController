@@ -14,6 +14,6 @@ import Foundation
 /// - presenting: presentation transition
 /// - dismissing: dismissal transition
 public enum RNTransitionState {
-    case presenting
-    case dismissing
+  case presenting
+  case dismissing
 }
